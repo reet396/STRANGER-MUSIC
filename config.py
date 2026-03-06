@@ -26,8 +26,8 @@ API_HASH = getenv("API_HASH")
 BOT_TOKEN = getenv("BOT_TOKEN")
 
 # Bot and owner info
-OWNER_USERNAME = getenv("OWNER_USERNAME", "SHIVANSHDEVS")
-BOT_USERNAME = getenv("BOT_USERNAME", "SapnaMusicRobot")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "iamthakur007")
+BOT_USERNAME = getenv("BOT_USERNAME", "Defaultermusic_bot")
 BOT_NAME = getenv("BOT_NAME", "SAPNA")
 ASSUSERNAME = getenv("ASSUSERNAME", "KHWAAISH_HOON")
 
@@ -50,8 +50,8 @@ UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 GIT_TOKEN = getenv("GIT_TOKEN", None)
 
 # Support
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/ITSZSHUKLA")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/MASTIWITHFRIENDSXD")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/BOTxBOOSTER")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/BOTxBOOSTER")
 
 # YT-API Get from @AmShashank on tg
 YOUR_API_KEY = getenv("YOUR_API_KEY", "stranger")
