@@ -37,33 +37,13 @@ from SHUKLAMUSIC.utils.decorators.language import LanguageStart
 from SHUKLAMUSIC.utils.formatters import get_readable_time
 from SHUKLAMUSIC.utils.inline import help_pannel, private_panel, start_panel
 from strings import get_string
-from config import BANNED_USERS
+from config import BANNED_USERS, SHASHANK_IMG
 
-SHASHANK_IMG = [
-"https://graph.org/file/f76fd86d1936d45a63c64.jpg",
-"https://graph.org/file/69ba894371860cd22d92e.jpg",
-"https://graph.org/file/67fde88d8c3aa8327d363.jpg",
-"https://graph.org/file/3a400f1f32fc381913061.jpg",
-"https://graph.org/file/a0893f3a1e6777f6de821.jpg",
-"https://graph.org/file/5a285fc0124657c7b7a0b.jpg",
-"https://graph.org/file/25e215c4602b241b66829.jpg",
-"https://graph.org/file/a13e9733afdad69720d67.jpg",
-"https://graph.org/file/692e89f8fe20554e7a139.jpg",
-"https://graph.org/file/db277a7810a3f65d92f22.jpg",
-"https://graph.org/file/a00f89c5aa75735896e0f.jpg",
-"https://graph.org/file/f86b71018196c5cfe7344.jpg",
-"https://graph.org/file/a3db9af88f25bb1b99325.jpg",
-"https://graph.org/file/5b344a55f3d5199b63fa5.jpg",
-"https://graph.org/file/84de4b440300297a8ecb3.jpg",
-"https://graph.org/file/84e84ff778b045879d24f.jpg",
-"https://graph.org/file/a4a8f0e5c0e6b18249ffc.jpg",
-"https://graph.org/file/df11d8257613418142063.jpg",
-"https://graph.org/file/9e23720fedc47259b6195.jpg",
-"https://graph.org/file/826485f2d7db6f09db8ed.jpg",
-"https://graph.org/file/ff3ad786da825b5205691.jpg",
-"https://graph.org/file/52713c9fe9253ae668f13.jpg",
-"https://graph.org/file/8f8516c86677a8c91bfb1.jpg",
-"https://graph.org/file/6603c3740378d3f7187da.jpg"
+EFFECT_IDS = [
+    5046509860389126442,
+    5107584321108051014,
+    5104841245755180586,
+    5159385139981059251,
 ]
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
@@ -80,6 +60,7 @@ async def start_pm(client, message: Message, _):
                 random.choice(SHASHANK_IMG),
                 caption=_['help_1'].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
+                message_effect_id=random.choice(EFFECT_IDS),
             )
         elif name.startswith("sud"):
             await sudoers_list(client=client, message=message, _=_)
@@ -114,6 +95,7 @@ async def start_pm(client, message: Message, _):
                 photo=thumbnail,
                 caption=searched_text,
                 reply_markup=key,
+                message_effect_id=random.choice(EFFECT_IDS),
             )
             if await is_on_off(2):
                 await app.send_message(
@@ -129,6 +111,7 @@ async def start_pm(client, message: Message, _):
             random.choice(SHASHANK_IMG),
             caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM, served_users, served_chats),
             reply_markup=InlineKeyboardMarkup(out),
+            message_effect_id=random.choice(EFFECT_IDS),
         )
         if await is_on_off(2):
             await app.send_message(
@@ -145,6 +128,7 @@ async def start_gp(client, message: Message, _):
         random.choice(SHASHANK_IMG),
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
+        message_effect_id=random.choice(EFFECT_IDS),
     )
     return await add_served_chat(message.chat.id)
 
@@ -187,6 +171,7 @@ async def welcome(client, message: Message):
                         app.mention,
                     ),
                     reply_markup=InlineKeyboardMarkup(out),
+                    message_effect_id=random.choice(EFFECT_IDS),
                 )
                 await add_served_chat(message.chat.id)
                 await message.stop_propagation()

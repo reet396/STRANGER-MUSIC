@@ -12,6 +12,8 @@
 # ❤️ Made with dedication and love by ItzShukla
 # -----------------------------------------------
 from pyrogram import filters
+import asyncio
+from time import time, strftime, gmtime
 from pyrogram.enums import ChatType
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import (
@@ -48,6 +50,7 @@ from SHUKLAMUSIC.utils.inline.settings import (
 )
 from SHUKLAMUSIC.utils.inline.start import private_panel
 from config import BANNED_USERS, OWNER_ID
+import config
 
 
 @app.on_message(
@@ -100,6 +103,53 @@ async def settings_back_markup(client, CallbackQuery: CallbackQuery, _):
             reply_markup=InlineKeyboardMarkup(buttons)
         )
 
+@app.on_callback_query(filters.regex("shiv_Shashank") & ~BANNED_USERS)
+@languageCB
+async def support(client, CallbackQuery, _):
+    await CallbackQuery.edit_message_text(
+        _["ABOUT_1"].format(app.mention),
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [          
+                    InlineKeyboardButton(
+                        text="ʙᴏᴛ-ᴀᴘɪ-ɪɴғᴏ 💌", callback_data="api_status"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text="sᴜᴘᴘᴏʀᴛ", url=config.SUPPORT_CHAT
+                    ),
+                    InlineKeyboardButton(
+                        text="ᴜᴘᴅᴀᴛᴇs", url=config.SUPPORT_CHANNEL
+                    ),
+
+                ],
+                [          
+                    InlineKeyboardButton(
+                        text="ʙᴀᴄᴋ", callback_data=f"settingsback_helper"
+                    )
+                ],
+            ]
+        ),
+    )
+
+
+@app.on_callback_query(filters.regex("^api_status$"))
+async def show_bot_info(c: app, q: CallbackQuery):
+    start = time()
+    await asyncio.sleep(0.1)
+    delta_ping = time() - start
+    txt = f"""💌 ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ sᴛᴀᴛᴜs...
+
+• ᴅᴀᴛᴀʙᴀsᴇ: ᴏɴʟɪɴᴇ
+• ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ: ʀᴇsᴘᴏɴsɪᴠᴇ
+• ʙᴏᴛ sᴇʀᴠᴇʀ: ʀᴜɴɴɪɴɢ sᴍᴏᴏᴛʜʟʏ
+• ʀᴇsᴘᴏɴsᴇ ᴛɪᴍᴇ: ᴏᴘᴛɪᴍᴀʟ
+• ᴀᴘɪ ᴘɪɴɢ: {delta_ping * 1000:.3f} ms   
+
+ᴇᴠᴇʀʏᴛʜɪɴɢ ʟᴏᴏᴋs ɢᴏᴏᴅ!
+"""
+    await q.answer(txt, show_alert=True)
 
 @app.on_callback_query(
     filters.regex(
